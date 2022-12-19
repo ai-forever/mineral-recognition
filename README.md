@@ -1,4 +1,4 @@
-# mineral-recognition
+# Zero-Shot Raw Mineral Visual Recognition and Description
 
 ## Preprocessing
 Run text detection
