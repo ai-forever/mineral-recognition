@@ -15,9 +15,9 @@ def main(args):
     threshold_iou = 0.10
     list_path_final = []
 
-    df = pd.read_csv(args.df)
+    df = pd.read_csv(args.input_csv)
 
-    with open(args.predict_size, 'w', newline='') as csv_file:
+    with open(args.output_csv, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         writer.writerow(['image_path',
                          'contour_analysis_mineral_x',
@@ -88,9 +88,9 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--df', type=str,
+    parser.add_argument('--input_csv', type=str,
                         help='Path to csv.file with bounding boxes for objects in the image.')
-    parser.add_argument('--predict_size', type=str,
+    parser.add_argument('--output_csv', type=str,
                         help='Path to csv.file with predict sizes of minerals.')
 
     args = parser.parse_args()

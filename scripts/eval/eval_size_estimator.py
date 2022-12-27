@@ -10,8 +10,8 @@ def main(args):
 
     logger = configure_logging()
 
-    data_size = pd.read_csv(args.predict_size)
-    size_gt_agaf = pd.read_csv(args.ground_true_size) # DEBUG
+    data_size = pd.read_csv(args.predict_csv)
+    size_gt_agaf = pd.read_csv(args.ground_true_csv) # DEBUG
 
     sizes = data_size.merge(size_gt_agaf, left_on='image_path', right_on='path_final')
 
@@ -28,9 +28,9 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--ground_true_size', type=str,
+    parser.add_argument('--ground_true_csv', type=str,
                         help='Path to csv.file with initial sizes of minerals.')
-    parser.add_argument('--predict_size', type=str,
+    parser.add_argument('--predict_csv', type=str,
                         help='Path to csv.file with predict sizes of minerals.')
 
     args = parser.parse_args()
