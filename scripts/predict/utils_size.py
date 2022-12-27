@@ -51,10 +51,14 @@ def image_preprocessing(img):
     return contours
 
 
-def get_list_box(detected_data):
+def get_list_box(detected_data, h, w):
     list_box = []
     for item in json.loads(detected_data):
         box = item['box']
+        box[0] = box[0]*w
+        box[1] = box[1]*h
+        box[2] = box[2]*w
+        box[3] = box[3]*h
         box = np.array(box, dtype=np.float32)
         list_box.append(box)
     list_box = np.array(list_box, dtype=np.float32)

@@ -15,8 +15,7 @@ def main(args):
     threshold_iou = 0.10
     list_path_final = []
 
-    df_text_boxes = pd.read_csv(args.df_text_boxes)
-    df_boxes = pd.read_csv(args.df_boxes)
+    df = pd.read_csv(args.df)
 
     with open(args.predict_size, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
@@ -29,18 +28,19 @@ def main(args):
                          'variety',
                          'satellites'])
 
-        for detected_data, image_path, index, text_data, variety, satellites in zip(df_boxes['detected_data'],
-                                                                                    df_boxes['path_final'],
-                                                                                    range(df_boxes['detected_data'].shape[0]),
-                                                                                    df_text_boxes['text_boxes'],
-                                                                                    df_text_boxes['variety'],
-                                                                                    df_text_boxes['satellites']):
+        for detected_data, image_path, index, text_data, variety, satellites in zip(df['mineral_boxes'],
+                                                                                    df['path'],
+                                                                                    range(df['mineral_boxes'].shape[0]),
+                                                                                    df['text_boxes'],
+                                                                                    df['ru_variety'],
+                                                                                    df['ru_satellites']):
             flag_cube = 0
             flag_mineral = 0
 
             try:
 
                 img = cv2.imread(image_path)
+                height, width = img.shape[0], img.shape[1]
                 list_box = utils_size.get_list_box(detected_data)
                 list_box_text = utils_size.get_list_text(text_data)
 
@@ -50,6 +50,10 @@ def main(args):
                     if len(list_box_text) > 0:
                         for box in list_box:
                             for text_box in list_box_text:
+                                text_box[0][0] *= width
+                                text_box[0][1] *= height
+                                text_box[1][0] *= width
+                                text_box[1][1] *= height
                                 text_box = np.array(text_box, dtype=np.int32)
                                 text_box = text_box.reshape(-1, 4)
                                 iou = utils_size.bb_intersection_over_union(box, text_box[0])
@@ -84,14 +88,9 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--df_text_boxes', type=str,
-                        default='../pavlov/data_text_boxes.csv',
-                        help='Path to csv.file with bounding boxes of text.')
-    parser.add_argument('--df_boxes', type=str,
-                        default='../pavlov/data_minerals_boxes.csv',
+    parser.add_argument('--df', type=str,
                         help='Path to csv.file with bounding boxes for objects in the image.')
     parser.add_argument('--predict_size', type=str,
-                        default='size_centimeter_minerals.csv',
                         help='Path to csv.file with predict sizes of minerals.')
 
     args = parser.parse_args()

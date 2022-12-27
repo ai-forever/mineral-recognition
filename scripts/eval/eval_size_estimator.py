@@ -29,10 +29,8 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--ground_true_size', type=str,
-                        default='razmery_merged_agaf.csv',
                         help='Path to csv.file with initial sizes of minerals.')
     parser.add_argument('--predict_size', type=str,
-                        default='size_centimeter_minerals.csv',
                         help='Path to csv.file with predict sizes of minerals.')
 
     args = parser.parse_args()
