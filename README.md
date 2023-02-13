@@ -1,5 +1,7 @@
 # Zero-Shot Raw Mineral Visual Recognition and Description
 
+This repository provides code for mineral recognition experiments. We explore zero-shot problems on raw mineral samples. The dataset and the paper will be shared later. 
+
 ## Preprocessing
 Run text detection
 ```bash
