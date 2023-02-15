@@ -3,6 +3,8 @@
 This repository provides code for mineral recognition experiments. We explore zero-shot problems on raw mineral samples. The dataset and the paper will be shared later. 
 
 ## Preprocessing
+During data preprocessing, we obtain zero-shot detection to locate text tables, reference cubes and minerals themselves. 
+
 Run text detection
 ```bash
 python scripts/preprocess/text_detection.py --input_csv=data/data.csv --image_path_col=image_path --output_csv=data/text_detection_res.csv --model_path=weights/craft_mlt_25k.pth --refiner_path=weights/craft_refiner_CTW1500.pth --cuda=0
@@ -32,3 +34,16 @@ Run eval size mineral
 ```bash
 python scripts/eval/eval_size_estimator.py --predict_csv=data/predict_size.csv --ground_true_csv=data/true_size.csv
 ```
+
+
+## Zero-shot classification
+For zero-shot classification, we use [CLIP](https://github.com/openai/CLIP).
+
+
+
+## Zero-shot segmentation
+For zero-shot segmentation, we apply [GradCAM](https://github.com/jacobgil/pytorch-grad-cam) techniques to a pre-trained classifier.
+
+
+
+
