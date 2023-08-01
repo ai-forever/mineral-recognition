@@ -1,3 +1,12 @@
+# Dataset
+[The dataset is available online](https://disk.yandex.ru/d/KapicF_MEysifg)
+* `mineral_images.zip` contains mineral images
+* `mineral_full.csv` contains all mineral samples descriptions
+* `minerals_10.csv`, `minerals_98.csv` and `minerals_360.csv` contain mineral samples splits
+* `minerals_size.csv` and `segm.tar` contain auxiliary information for some samples
+
+
+
 # Zero-Shot Raw Mineral Visual Recognition and Description
 
 This repository provides code for mineral recognition experiments. We explore zero-shot problems on raw mineral samples. The dataset and the paper will be shared later. 
